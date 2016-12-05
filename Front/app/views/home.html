@@ -1,0 +1,46 @@
+
+    <div class="col-md-6" ng-repeat="post in posts | orderBy: '-upvotes'">
+        <div class="single-post">
+            <H3 class="md-headline">
+                <a ng-show="post.link" href="{{post.link}}" target="_blank" class="postlink">
+                    <span class="fa fa-link"></span>
+                </a>
+                {{post.title}}&nbsp;<small>door {{post.author}}</small>
+            </H3>
+            <p>{{post.content}}</p>
+            <div class="text-right comment-buttons">
+                <a ng-click="incrementUpvotes(post)" class="btn btn-default"><span class="fa fa-thumbs-up"></span> {{post.upvotes}}</a>
+                &nbsp;&nbsp;
+                <a ng-click="incrementDownvotes(post)" class="btn btn-default"><span class="fa fa-thumbs-down"></span> {{post.downvotes}}</a>
+                &nbsp;&nbsp;
+                <a href="#/posts/{{post._id}}" class="btn btn-default"><span class="fa fa-comment"></span> Reacties ({{post.comments.length}})</a></span>
+            </div>
+        </div>
+    </div>
+
+<div class="col-md-12">
+    <div class="single-post">
+        <h3 class="md-headline" ng-show="isLoggedIn()">
+            Nieuw bericht
+        </h3>
+        <div ng-hide="isLoggedIn()">
+            <h4>Om een nieuw bericht te plaatsen, dien je <a href="/#/login">aangemeld</a> of <a href="/#/register">geregistreerd</a> te zijn.</h4>
+        </div>
+        <form id="newpostcard" ng-show="isLoggedIn()" data-ng-submit="addPost()">
+            <div class="col-md-6 col-sm-6">
+				<input type="text" ng-model="title" class="form-control transition" aria-required="true" placeholder="Titel van het bericht" />
+			</div>
+			<div class="col-md-6 col-sm-6">
+				<input type="url" ng-model="link" class="form-control transition" aria-required="true" placeholder="Link" />
+			</div>
+            <div class="col-md-12 col-sm-12">
+				<textarea ng-model="content" cols="40" rows="10" class=" form-control transition" aria-required="true" placeholder="Uw beoordeling over onze diensten"></textarea>
+			</div>
+			<div class="row">
+				<div class="col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6">
+					<a ng-click="addPost()" class="btn btn-default">Plaatsen</a>
+				</div>
+			</div>
+        </form>
+    </div>
+</div>

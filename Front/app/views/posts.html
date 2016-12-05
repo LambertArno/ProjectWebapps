@@ -1,0 +1,50 @@
+<div class="col-md-12">
+    <div class="single-post">
+        <H3 class="md-headline">
+            <a ng-show="post.link" href="{{post.link}}" target="_blank" class="postlink">
+                <span class="fa fa-link"></span>
+            </a>
+            {{post.title}}
+        </H3>
+        <p>{{post.content}}</p>
+    </div>
+
+    <hr ng-show="post.comments.length > 0"/>
+
+
+    <div ng-repeat="comment in post.comments | orderBy:'-upvotes'">
+        <div class="single-post">
+            <div class="col-md-2">
+                <a ng-click="incrementUpvotes(comment)" class="btn btn-default"><span class="fa fa-thumbs-up"></span> {{comment.upvotes}}</a>
+                &nbsp;&nbsp;
+                <a ng-click="incrementDownvotes(comment)" class="btn btn-default"><span class="fa  fa-thumbs-down"></span> {{comment.downvotes}}</a>
+            </div>
+            <div class="col-md-10">
+                <p>{{comment.body}}</p>
+                <small>door {{comment.author}}</small>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="single-post">
+        <h3 class="md-headline" ng-show="isLoggedIn()">
+            Nieuwe reactie
+        </h3>
+        <div ng-hide="isLoggedIn()">
+            <h4>Je moet je <a href="/#/login">aanmelden</a> or <a href="/#/register">registreren</a> voor je kan reageren.</h4>
+        </div>
+        <form id="newpostcard" ng-submit="addComment()" ng-show="isLoggedIn()">
+            <div class="col-md-12 col-sm-12">
+                <textarea ng-model="body" cols="40" rows="10" class=" form-control transition" aria-required="true" placeholder="Uw reactie"></textarea>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6">
+                    <a ng-click="addComment()" class="btn btn-default">Plaatsen</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

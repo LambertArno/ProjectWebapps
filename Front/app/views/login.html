@@ -1,0 +1,26 @@
+<div ng-show="error" class="alert alert-danger row">
+    <span>{{ error.message }}</span>
+</div>
+
+<section class="login-container">
+    <div class="login-block col-md-6 col-md-offset-3">
+        <form ng-submit="logIn()" class="text-center">
+            <div class="col-md-8 col-md-offset-2">
+                <h2>Aanmelden</h2>
+                <hr />
+            </div>
+            <div class="form-group col-md-8 col-md-offset-2">
+                <input type="text" class="form-control" placeholder="Username" ng-model="user.username"></input>
+            </div>
+            <div class="form-group col-md-8 col-md-offset-2">
+                <input type="password" class="form-control" placeholder="Password" ng-model="user.password"></input>
+            </div>
+            <div class="col-md-8 col-md-offset-2">
+                <button type="submit" class="btn btn-primary">Aanmelden</button>
+                <br />
+                <br />
+                <a href='index.html#/register'>Nog geen account?</a>
+            </div>
+        </form>
+    </div>
+</section>

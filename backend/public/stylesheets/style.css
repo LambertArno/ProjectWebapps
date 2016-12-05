@@ -1,0 +1,12 @@
+body {
+    background: url('../images/bg.jpg');
+    background-attachment: fixed;
+    height: auto;
+}
+
+md-card {
+    width: 80%;
+    margin-left: auto;
+    margin-top: 5dip;
+    margin-right: auto;
+}
