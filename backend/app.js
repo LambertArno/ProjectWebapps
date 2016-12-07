@@ -13,7 +13,7 @@ require('./models/Comments');
 require('./models/Users');
 require('./config/passport');
 
-mongoose.connect('mongodb://localhost/socialnetwork');
+mongoose.connect('mongodb://admin:admin@ds127958.mlab.com:27958/tbn');
 
 cors({
     credentials: true,
