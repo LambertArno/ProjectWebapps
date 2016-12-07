@@ -8,3 +8,7 @@ Dit project is tot stand gekomen voor de opdracht van het opleidingsonderdeel We
 
 Run `npm install` and `npm start` in the backend folder to start.
 Run `grunt serve` in the frontend folder to start the app.
+
+## MongoDB
+
+De databank van dit project is een MongoDB. Deze staat online via mlab.com. Op die manier is alle data bij alle running versies hetzelfde.
