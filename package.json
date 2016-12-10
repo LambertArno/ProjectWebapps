@@ -5,8 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "grunt test",
-    "start": "nodemon ./backend/bin/www",
-    "start": "grunt serve ./Front/"
+    "start": "nodemon ./backend/bin/www"
   },
   "author": "Arno Lambert",
   "license": "BSD",
