@@ -1,10 +1,20 @@
 <div class="col-md-12">
     <div class="single-post">
         <H3 class="md-headline">
+          <div class="row">
+          <div class="col-xs-10">
             <a ng-show="post.link" href="{{post.link}}" target="_blank" class="postlink">
                 <span class="fa fa-link"></span>
             </a>
             {{post.title}}
+          </div>
+          <div class="col-xs-2 text-right">
+            <a ng-show="post.author === currentUser" href="" ng-click='deletePost()' target="_blank" class="postlink">
+                <span class="fa fa-trash"></span>
+            </a>
+          </div>
+          </div>
+
         </H3>
         <p>{{post.content}}</p>
     </div>

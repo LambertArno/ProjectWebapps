@@ -64,7 +64,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             ]
         });
 
-    $urlRouterProvider.otherwise('home');
+    $urlRouterProvider.otherwise('/');
 });
 },{}],3:[function(require,module,exports){
 var app = angular.module('flapperNews');
@@ -125,7 +125,7 @@ app.controller('NavCtrl', function($scope, auth) {
 },{}],6:[function(require,module,exports){
 var app = angular.module('flapperNews');
 
-app.controller('PostsCtrl', function($scope, posts, post, auth) {
+app.controller('PostsCtrl', function($scope, $state, posts, post, auth) {
     $scope.post = post;
     $scope.isLoggedIn = auth.isLoggedIn;
     $scope.addComment = function() {
@@ -142,10 +142,17 @@ app.controller('PostsCtrl', function($scope, posts, post, auth) {
     };
     $scope.incrementUpvotes = function(comment) {
         posts.upvoteComment(post, comment);
+        console.log(auth.currentUser);
+
     };
     $scope.incrementDownvotes = function(comment) {
         posts.downvoteComment(post, comment);
     };
+    $scope.deletePost = function() {
+        posts.removePost(post);
+        $state.go('home');
+    };
+    $scope.currentUser = auth.currentUser();
 });
 },{}],7:[function(require,module,exports){
 var app = angular.module('flapperNews');
@@ -267,6 +274,13 @@ app.factory('posts', function($http, auth) {
         }).success(function(data) {
             comment.downvotes += 1;
         });
+    };
+    o.removePost = function(post) {
+      return $http.get('http://localhost:3000/posts/' + post._id + '/delete/', {
+        headers: {
+            Authorization: 'Bearer ' + auth.getToken()
+        }
+      });
     };
     return o;
 });
