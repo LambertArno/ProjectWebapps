@@ -22,4 +22,8 @@ app.controller('MainCtrl', function($scope, posts, auth) {
     $scope.incrementDownvotes = function(post) {
         posts.downvote(post);
     };
-});
+}).directive('copyright',function(){
+    return {
+        template: 'Copyright © 2016 The Business Network | Powered by <a class="designed-by" href="http://www.aldesign.be" target="_blank">AL Design</a>'
+    };
+});;

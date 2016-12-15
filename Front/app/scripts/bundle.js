@@ -66,6 +66,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/');
 });
+
 },{}],3:[function(require,module,exports){
 var app = angular.module('flapperNews');
 
@@ -92,11 +93,10 @@ app.controller('AuthCtrl', function($scope, $state, auth) {
 var app = angular.module('flapperNews');
 
 app.controller('MainCtrl', function($scope, posts, auth) {
-
     $scope.posts = posts.posts;
     $scope.isLoggedIn = auth.isLoggedIn;
     $scope.addPost = function() {
-        if (!$scope.title || $scope.title === '') {
+        if (!$scope.title || $scope.title === '' || !$scope.content || $scope.content === '') {
             return;
         }
         posts.create({
@@ -114,7 +114,12 @@ app.controller('MainCtrl', function($scope, posts, auth) {
     $scope.incrementDownvotes = function(post) {
         posts.downvote(post);
     };
-});
+}).directive('copyright',function(){
+    return {
+        template: 'Copyright © 2016 The Business Network | Powered by <a class="designed-by" href="http://www.aldesign.be" target="_blank">AL Design</a>'
+    };
+});;
+
 },{}],5:[function(require,module,exports){
 var app = angular.module('flapperNews');
 app.controller('NavCtrl', function($scope, auth) {
@@ -125,7 +130,7 @@ app.controller('NavCtrl', function($scope, auth) {
 },{}],6:[function(require,module,exports){
 var app = angular.module('flapperNews');
 
-app.controller('PostsCtrl', function($scope, $state, posts, post, auth) {
+app.controller('PostsCtrl', function($scope, posts, post, auth) {
     $scope.post = post;
     $scope.isLoggedIn = auth.isLoggedIn;
     $scope.addComment = function() {
@@ -142,17 +147,10 @@ app.controller('PostsCtrl', function($scope, $state, posts, post, auth) {
     };
     $scope.incrementUpvotes = function(comment) {
         posts.upvoteComment(post, comment);
-        console.log(auth.currentUser);
-
     };
     $scope.incrementDownvotes = function(comment) {
         posts.downvoteComment(post, comment);
     };
-    $scope.deletePost = function() {
-        posts.removePost(post);
-        $state.go('home');
-    };
-    $scope.currentUser = auth.currentUser();
 });
 },{}],7:[function(require,module,exports){
 var app = angular.module('flapperNews');
@@ -205,6 +203,7 @@ app.factory('auth', function($http, $window) {
     };
     return auth;
 });
+
 },{}],8:[function(require,module,exports){
 var app = angular.module('flapperNews');
 
@@ -275,13 +274,7 @@ app.factory('posts', function($http, auth) {
             comment.downvotes += 1;
         });
     };
-    o.removePost = function(post) {
-      return $http.get('http://localhost:3000/posts/' + post._id + '/delete/', {
-        headers: {
-            Authorization: 'Bearer ' + auth.getToken()
-        }
-      });
-    };
     return o;
 });
+
 },{}]},{},[1]);
