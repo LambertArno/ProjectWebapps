@@ -26,4 +26,8 @@ app.controller('MainCtrl', function($scope, posts, auth) {
     return {
         template: 'Copyright © 2016 The Business Network | Powered by <a class="designed-by" href="http://www.aldesign.be" target="_blank">AL Design</a>'
     };
-});;
+}).directive('voettekst', function(){
+  return {
+    templateUrl: "./views/footer-directive.html"
+  };
+});
