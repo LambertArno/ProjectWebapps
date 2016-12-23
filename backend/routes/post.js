@@ -135,11 +135,16 @@ router.put('/posts/:post/downvote', auth, function(req, res, next) {
     });
 });
 
-router.delete('/posts/:post/delete', function(req, res, next) {
+router.get('/posts/:post/delete', function(req, res, next) {
     Post.db.collections.posts.remove({
         "_id": req.post._id
     });
-    res.json();
+    Post.find(function(err, posts) {
+        if (err) {
+            return next(err);
+        }
+        res.json(posts);
+    });
 });
 
 
