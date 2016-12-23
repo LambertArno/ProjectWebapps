@@ -136,6 +136,8 @@ var app = angular.module('flapperNews');
 
 app.controller('PostsCtrl', function($scope, posts, post, auth) {
     $scope.post = post;
+    $scope.currentUser = auth.currentUser();
+    console.log(auth.currentUser());
     $scope.isLoggedIn = auth.isLoggedIn;
     $scope.addComment = function() {
         if ($scope.body === '') {
@@ -156,6 +158,7 @@ app.controller('PostsCtrl', function($scope, posts, post, auth) {
         posts.downvoteComment(post, comment);
     };
 });
+
 },{}],7:[function(require,module,exports){
 var app = angular.module('flapperNews');
 
