@@ -23,6 +23,6 @@ app.controller('PostsCtrl', function($state, $scope, posts, post, auth) {
         posts.downvoteComment(post, comment);
     };
     $scope.deletePost = function() {
-      posts.removePost(post);
-    }
+      posts.removePost(post).success($state.go('home'));
+    };
 });

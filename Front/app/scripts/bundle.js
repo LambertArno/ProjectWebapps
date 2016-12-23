@@ -136,7 +136,7 @@ app.controller('NavCtrl', function($scope, auth) {
 },{}],6:[function(require,module,exports){
 var app = angular.module('flapperNews');
 
-app.controller('PostsCtrl', function($scope, posts, post, auth) {
+app.controller('PostsCtrl', function($state, $scope, posts, post, auth) {
     $scope.post = post;
     $scope.currentUser = auth.currentUser(); // Om te kijken of user kan deleten
     $scope.isLoggedIn = auth.isLoggedIn; // Om te weten of user mag reageren
@@ -159,7 +159,7 @@ app.controller('PostsCtrl', function($scope, posts, post, auth) {
         posts.downvoteComment(post, comment);
     };
     $scope.deletePost = function() {
-      posts.removePost(post);
+      posts.removePost(post).success($state.go('home'));
     };
 });
 
